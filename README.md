@@ -1,1 +1,1 @@
-This repository contains python code which can be used to reproduce the experiments in our work _Invariant Measures in Time-Delay Coordinates for Unique Dynamical System Idenfitification. _
+This repository contains python code which can be used to reproduce the experiments in our work **Invariant Measures in Time-Delay Coordinates for Unique Dynamical System Idenfitification. **
