@@ -20,28 +20,23 @@ dt = 0.001 #time-step
 num_steps = int(1e6) #length of trajectory simulation
 y = np.zeros((num_steps + 1, 3))  
 y[0] = np.array([-5.065457, -7.56735 , 19.060379])  # Set initial values
-ts = []
-ts.append(0)
 tau = 100 #time-delay
 method = 'delay_IM' #select either 'delay_IM' or 'IM' to choose between a delay-coordinate invariant measure loss or a state-coordinate invariant measure loss
-num_samples = 2000 #
-Nsteps = 30000
+num_samples = 2000 #the number of trajectory samples we want to learn from. The runtime is very sensitive to this number since we do not use minibatches. For > 2000, one should partition into mini-batches. 
+Nsteps = 30000 #how many training iterations to take 
 plot_every = 500
 
 ###############################################
 
+#simulate trajectory
 for i in range(num_steps):
-    ts.append((i+1)*dt)
     y[i + 1] = y[i] + lorenz(y[i]) * dt
 
-noise_scale = 1
-y_full = y+np.random.normal(0,noise_scale,(len(y),3))
-y = y_full
+#rescale for NN learning
 transformer = MaxAbsScaler().fit(y)
 y = transformer.transform(y)
-ts = np.array(ts)
-ts = torch.tensor(ts,dtype = torch.float,requires_grad = True)
 
+#time-delay map
 def delay(X):
     dim = 6
     new = np.zeros((len(X)-tau*dim,dim))
@@ -50,18 +45,19 @@ def delay(X):
         new[:,i] = X[dim*tau-(i+1)*tau:-(1+i)*tau]
     return new
 
+#form delayed trajectory
 y_delay = delay(y[:,0])
 Ty_true = y[tau:tau+len(y_delay)]
 y = y[:len(y_delay)]
-############################# Construct batches
 
+#take random samples for training
 import random
 batch_ixs = list(range(0,len(y)))
 ixs = random.sample(batch_ixs,num_samples)
 
 ############################## Build network 
-# torch.manual_seed(123897612)
-torch.manual_seed(12932)
+torch.manual_seed(12932) #random seed so that initialization is controlled for comparison
+
 net = nn.Sequential(
     nn.Linear(3, 100),
     nn.Tanh(),
@@ -77,7 +73,6 @@ optimizer = optim.Adam(net.parameters(), lr=1e-3)
 ##############################  training loop
 
 net.train()
-
 losses = []
 for step in range(Nsteps):
     y_batch = torch.tensor(y[ixs],dtype = torch.float,requires_grad = True)    
