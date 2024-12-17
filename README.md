@@ -1,6 +1,6 @@
 # Invariant Measures in Delay-Coordinates
 
-This repository contains python code which can be used to reproduce the numerical experiments in our work *[Invariant Measures in Time-Delay Coordinates for Unique Dynamical System Idenfitification](https://arxiv.org/abs/2412.00589v1).* 
+This repository contains Python code which can be used to reproduce the numerical experiments in our work *[Invariant Measures in Time-Delay Coordinates for Unique Dynamical System Idenfitification](https://arxiv.org/abs/2412.00589v1).* 
 
 `torus_rotation.py`: This file simulates trajectories of four different torus rotation maps and visualizes the corresponding state-coordinate invariant measures and delay-coordinate invariant measures. The result of running this file is shown below. 
 
