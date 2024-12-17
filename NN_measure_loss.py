@@ -7,7 +7,7 @@ from torch import optim
 from sklearn.preprocessing import MaxAbsScaler
 import pickle
 
-############################# lorenz system
+############################# lorenz system; see https://en.wikipedia.org/wiki/Lorenz_system
 def lorenz(xyz, *, s=10, r=28, b=2.667):
     x, y, z = xyz
     x_dot = s*(y - x)
