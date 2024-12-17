@@ -20,8 +20,6 @@ yix = data1[1]
 N = 500
 L1mid = np.convolve(L1, np.ones(N)/N, mode='valid')
 L2mid = np.convolve(L2, np.ones(N)/N, mode='valid')
-# iters = [i for i in range(len(L1))]
-# iters_conv = [i+250 for i in range(len(L1)-500)]
 y = y[::100]
 length = int(1e3)
 start = int(0)
