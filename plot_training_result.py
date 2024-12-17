@@ -31,6 +31,7 @@ ms = 2
 iters = [i for i in range(len(L1))]
 iters2 = [i for i in range(len(L1mid))]
 
+
 ax[0,0].plot(y[:,0][start:start+length],y[:,2][start:start+length],linewidth = lw,linestyle = '-',marker = 'o',markersize = ms,color = 'dimgrey')  
 ax[1,0].plot(xs_IM[:,0][start:start+length],xs_IM[:,2][start:start+length],linewidth = lw,linestyle = '-',marker = 'o',markersize = ms,color = 'darkred')  
 ax[0,1].plot(iters,L1,color = 'darkred',linewidth = 2,alpha = .3,label = r'$\mathcal{J}_1$')
@@ -68,3 +69,8 @@ ax[1,0].set_xlim(-20,20)
 ax[1,0].set_ylim(0,45)
 ax[1,1].set_xlim(-20,20)
 ax[1,1].set_ylim(0,45)
+plt.show()
+
+
+
+
