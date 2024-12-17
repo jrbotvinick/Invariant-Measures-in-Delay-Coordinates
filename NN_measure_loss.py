@@ -21,9 +21,9 @@ num_steps = int(1e6) #length of trajectory simulation
 y = np.zeros((num_steps + 1, 3))  
 y[0] = np.array([-5.065457, -7.56735 , 19.060379])  # Set initial values
 tau = 100 #time-delay
-method = 'IM' #select either 'delay_IM' or 'IM' to choose between a delay-coordinate invariant measure loss or a state-coordinate invariant measure loss
+method = 'delay_IM' #select either 'delay_IM' or 'IM' to choose between a delay-coordinate invariant measure loss or a state-coordinate invariant measure loss
 num_samples = 1000 #the number of trajectory samples we want to learn from. The runtime is very sensitive to this number since we do not use minibatches. For > 2000, one should partition into mini-batches. 
-Nsteps = 30000 #how many training iterations to take 
+Nsteps = 10000 #how many training iterations to take 
 plot_every = 500 #how often to plot training result
 ###############################################
 
@@ -55,7 +55,7 @@ batch_ixs = list(range(0,len(y)))
 ixs = random.sample(batch_ixs,num_samples)
 
 ############################## Build network 
-torch.manual_seed(1293452) #random seed so that initialization is controlled for comparison
+torch.manual_seed(12932452) #random seed so that initialization is controlled for comparison
 
 net = nn.Sequential(
     nn.Linear(3, 100),
@@ -134,7 +134,7 @@ for step in range(Nsteps):
             x  = net(x)
         xs = transformer.inverse_transform(np.array(xs))
         plt.title('Model Simulated Trajectory',fontsize = 15)
-        plt.plot(xs[:,0],xs[:,2])
+        plt.plot(xs[:,0],xs[:,2],linewidth = 1)
         plt.show()
 
 
