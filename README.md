@@ -9,3 +9,5 @@ This repository contains python code which can be used to reproduce the numerica
 `NN_measure_loss.py`: This file trains a neural network to learn the dynamics of the Lorenz-63 system using loss functions based on either the state-coordinate or delay-coordinate invariant meausre.
 
 `plot_training_result.py`: This file plots the result of the neural network training, shown below. 
+
+![image](https://github.com/user-attachments/assets/a3419549-40c9-426a-aaf6-0078926d2fec)
